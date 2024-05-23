@@ -1,5 +1,11 @@
-:root {
-  background-color: #dfcd44;
+html,
+body,
+root {
+  background-color: #6def1c;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .main-block {
@@ -14,4 +20,19 @@
   font-family: sans-serif;
   color: sienna;
   border: 1px solid blue;
+}
+
+.board {
+  border: 2px solid orangered;
+  height: 350px;
+  width: 350px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cell {
+  height: 100px;
+  width: 100px;
+  border: 2px solid blue;
+  font-size: large;
 }
