@@ -38,6 +38,9 @@ function App() {
   let [playing, setPlaying] = useState('X');
 
   const clickHandler = (rowIdx, colIdx) => {
+    if (board[rowIdx][colIdx]['symbol'])
+      return;
+
     setBoard(oldBoard => {
       return updateBoard(oldBoard, rowIdx, colIdx, playing);
     });
