@@ -1,7 +1,7 @@
 html,
 body,
 root {
-  background-color: #6def1c;
+  background-color: #f7fcf4;
   height: 100%;
   width: 100%;
   margin: 0;
@@ -12,6 +12,10 @@ root {
   border: 2px solid rgb(239, 74, 19);
   height: 500px;
   width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
 }
 
@@ -19,15 +23,21 @@ root {
   font-size: 2.5rem;
   font-family: sans-serif;
   color: sienna;
-  border: 1px solid blue;
 }
 
 .board {
-  border: 2px solid orangered;
-  height: 350px;
-  width: 350px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.board__row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .cell {

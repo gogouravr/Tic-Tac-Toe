@@ -2,11 +2,12 @@
 export default function GameBoard({ board, clickHandler }) {
     return (
         <div className="board">
-            {board.map((row, rowIdx) =>
-                row.map((cell, colIdx) =>
+            {board.map((row, rowIdx) => {
+                return <div className="board__row" key={rowIdx}> {row.map((cell, colIdx) =>
                     <span onClick={() => clickHandler(rowIdx, colIdx)} className="cell" key={`${rowIdx}${colIdx}`}>
                         {cell.symbol || 'Click'}
-                    </span>))}
+                    </span>)}</div>
+            })}
         </div>
     )
 }
