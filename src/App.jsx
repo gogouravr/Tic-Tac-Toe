@@ -36,6 +36,7 @@ function App() {
 
   const [board, setBoard] = useState(getFreshBoard());
   let [playing, setPlaying] = useState('X');
+  let [playerNames, setplayerNames] = useState({ player1: 'X', player2: 'Y' });
 
   const clickHandler = (rowIdx, colIdx) => {
     if (board[rowIdx][colIdx]['symbol'])
@@ -54,9 +55,11 @@ function App() {
         Tic Tac Toe
       </header>
       <main>
-        <Player />
-        <Player />
-        <GameBoard board={board} clickHandler={clickHandler} />
+        <section className="player-section">
+          <Player playerNames={playerNames} symbol={'X'} setPlayerNames={setplayerNames} />
+          <Player playerNames={playerNames} symbol={'Y'} setPlayerNames={setplayerNames} />
+        </section>
+        <GameBoard board={board} clickHandler={clickHandler} setName={setplayerNames} />
       </main>
     </div>
   )

@@ -9,9 +9,10 @@ root {
 }
 
 .main-block {
-  border: 2px solid rgb(239, 74, 19);
+  border: 2px solid rgb(21, 10, 6);
   height: 500px;
   width: 500px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,8 +22,8 @@ root {
 
 .header {
   font-size: 2.5rem;
-  font-family: sans-serif;
-  color: sienna;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: rgb(178, 120, 21);
 }
 
 .board {
@@ -44,5 +45,18 @@ root {
   height: 100px;
   width: 100px;
   border: 2px solid blue;
-  font-size: large;
+  font-size: 50px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  color: darkred;
+}
+
+.cell:hover {
+  cursor: pointer;
+}
+
+.player-section {
+  display: flex;
+  justify-content: space-between;
 }
