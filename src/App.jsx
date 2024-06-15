@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Player from './components/Player/Player';
 import GameBoard from './components/GameBoard/GameBoard';
+import Modal from './components/utils/Modal';
 import './App.css';
 
 class Cell {
@@ -48,13 +49,25 @@ function App() {
     setPlaying(togglePlaying(playing));
   }
 
+  const isGameConcluded = () => {
+    for (let row of board) {
+      for (let cell of row)
+        if (!cell.symbol)
+          return false;
+    }
+
+    return true;
+  }
+
 
   return (
     <div className='main-block'>
+
       <header className='header'>
         Tic Tac Toe
       </header>
       <main>
+        <Modal open={isGameConcluded()} />
         <section className="player-section">
           <Player playerNames={playerNames} symbol={'X'} setPlayerNames={setplayerNames} />
           <Player playerNames={playerNames} symbol={'Y'} setPlayerNames={setplayerNames} />
