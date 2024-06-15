@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Player from './components/Player/Player';
 import GameBoard from './components/GameBoard/GameBoard';
 import Modal from './components/utils/Modal';
@@ -34,6 +34,8 @@ function togglePlaying(playing) {
 }
 
 function App() {
+  const modal = useRef()
+
 
   const [board, setBoard] = useState(getFreshBoard());
   let [playing, setPlaying] = useState('X');
@@ -46,7 +48,11 @@ function App() {
     setBoard(oldBoard => {
       return updateBoard(oldBoard, rowIdx, colIdx, playing);
     });
+    console.log(isGameConcluded())
+
+
     setPlaying(togglePlaying(playing));
+
   }
 
   const isGameConcluded = () => {
@@ -55,9 +61,14 @@ function App() {
         if (!cell.symbol)
           return false;
     }
-
     return true;
   }
+
+  const openModal = () => {
+    modal.current.showModal();
+  }
+  if (isGameConcluded())
+    openModal();
 
 
   return (
@@ -67,7 +78,7 @@ function App() {
         Tic Tac Toe
       </header>
       <main>
-        <Modal open={isGameConcluded()} />
+        <Modal ref={modal} />
         <section className="player-section">
           <Player playerNames={playerNames} symbol={'X'} setPlayerNames={setplayerNames} />
           <Player playerNames={playerNames} symbol={'Y'} setPlayerNames={setplayerNames} />
