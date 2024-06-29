@@ -1,8 +1,8 @@
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import Player from './components/Player/Player';
 import GameBoard from './components/GameBoard/GameBoard';
 import Modal from './components/utils/Modal';
-import BoardContextProvider, { BoardContext } from './store/board-context';
+import BoardContextProvider from './store/board-context'
 import './App.css';
 
 
@@ -11,30 +11,19 @@ import './App.css';
 
 function App() {
   const modal = useRef();
-  const boardContext = useContext(BoardContext);
 
   let [playing, setPlaying] = useState('X');
 
   let [playerNames, setplayerNames] = useState({ player1: 'X', player2: 'Y' });
-
-
-
-  console.log(boardContext.board);
-  const isGameConcluded = () => {
-    for (let row of boardContext.board) {
-      for (let cell of row)
-        if (!cell.symbol)
-          return false;
-    }
-    return true;
-  }
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const openModal = () => {
     modal.current.showModal();
   }
-  if (isGameConcluded())
-    openModal();
 
+  console.log(isGameOver);
+  if (isGameOver)
+    openModal();
 
   return (
     <BoardContextProvider>
@@ -48,7 +37,7 @@ function App() {
             <Player playerNames={playerNames} symbol={'X'} setPlayerNames={setplayerNames} />
             <Player playerNames={playerNames} symbol={'Y'} setPlayerNames={setplayerNames} />
           </section>
-          <GameBoard playing={playing} setPlaying={setPlaying} setName={setplayerNames} />
+          <GameBoard playing={playing} setPlaying={setPlaying} setName={setplayerNames} setIsGameOver={setIsGameOver} />
         </main>
       </div>
     </BoardContextProvider>

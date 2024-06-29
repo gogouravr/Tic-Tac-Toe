@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import { BoardContext, Cell } from '../../store/board-context';
 
 function togglePlaying(playing) {
@@ -14,7 +14,8 @@ function updateBoard(board, rowIdx, colIdx, symbol) {
 }
 
 /* eslint-disable react/prop-types */
-export default function GameBoard({ playing, setPlaying }) {
+// eslint-disable-next-line react/display-name
+const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
     const boardContext = useContext(BoardContext);
 
     const clickHandler = (rowIdx, colIdx) => {
@@ -29,6 +30,18 @@ export default function GameBoard({ playing, setPlaying }) {
         setPlaying(togglePlaying(playing));
     }
 
+    const isGameConcluded = () => {
+        for (let row of boardContext.board) {
+            for (let cell of row)
+                if (!cell.symbol)
+                    return false;
+        }
+        return true;
+    }
+
+    if (isGameConcluded())
+        setIsGameOver(isGameConcluded());
+
     return (
         <div className="board">
             {boardContext.board.map((row, rowIdx) => {
@@ -39,4 +52,6 @@ export default function GameBoard({ playing, setPlaying }) {
             })}
         </div>
     )
-}
+})
+
+export default GameBoard;

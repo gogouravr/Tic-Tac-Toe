@@ -30,7 +30,7 @@ export default function BoardContextProvider({ children }) {
         setBoard
     }
 
-    return (< BoardContext.Provider value={ctxValue} >
+    return (<BoardContext.Provider value={ctxValue} >
         {children}
     </BoardContext.Provider>)
 }
