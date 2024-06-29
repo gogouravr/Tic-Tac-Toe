@@ -5,10 +5,6 @@ import Modal from './components/utils/Modal';
 import BoardContextProvider from './store/board-context'
 import './App.css';
 
-
-
-
-
 function App() {
   const modal = useRef();
 
@@ -16,12 +12,11 @@ function App() {
 
   let [playerNames, setplayerNames] = useState({ player1: 'X', player2: 'Y' });
   const [isGameOver, setIsGameOver] = useState(false);
+  console.log('App component rendering', isGameOver);
 
   const openModal = () => {
     modal.current.showModal();
   }
-
-  console.log(isGameOver);
   if (isGameOver)
     openModal();
 
@@ -37,7 +32,11 @@ function App() {
             <Player playerNames={playerNames} symbol={'X'} setPlayerNames={setplayerNames} />
             <Player playerNames={playerNames} symbol={'Y'} setPlayerNames={setplayerNames} />
           </section>
-          <GameBoard playing={playing} setPlaying={setPlaying} setName={setplayerNames} setIsGameOver={setIsGameOver} />
+          <GameBoard
+            playing={playing}
+            setPlaying={setPlaying}
+            setName={setplayerNames}
+            setIsGameOver={setIsGameOver} />
         </main>
       </div>
     </BoardContextProvider>

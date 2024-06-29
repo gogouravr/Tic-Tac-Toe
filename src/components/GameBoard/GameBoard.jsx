@@ -1,4 +1,4 @@
-import { useContext, memo } from 'react';
+import { useContext, memo, useEffect } from 'react';
 import { BoardContext, Cell } from '../../store/board-context';
 
 function togglePlaying(playing) {
@@ -16,6 +16,7 @@ function updateBoard(board, rowIdx, colIdx, symbol) {
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/display-name
 const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
+    console.log('GameBoard rendering!')
     const boardContext = useContext(BoardContext);
 
     const clickHandler = (rowIdx, colIdx) => {
@@ -37,10 +38,16 @@ const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
                     return false;
         }
         return true;
-    }
+    };
 
-    if (isGameConcluded())
-        setIsGameOver(isGameConcluded());
+    useEffect(() => {
+        console.log('use effect executed', isGameConcluded())
+        if (isGameConcluded())
+            /* if the react state is set with the same value as previous
+            the rerender does not happen. This behaviour of React ensures 
+            unnecessary rerender leading to performance optimisation */
+            setIsGameOver(isGameConcluded);
+    });
 
     return (
         <div className="board">
