@@ -1,4 +1,4 @@
-import { useState, createContext } from 'react';
+import { createContext, useReducer } from 'react';
 
 export class Cell {
     constructor(x, y, symbol = null) {
@@ -22,12 +22,25 @@ export const BoardContext = createContext({
     setBoard: () => { }
 });
 
+const boardReducer = (state, action) => {
+    if (action.type === 'UPDATE_BOARD') {
+        return action.payload;
+    }
+    return state;
+}
+
 // eslint-disable-next-line react/prop-types
 export default function BoardContextProvider({ children }) {
-    const [board, setBoard] = useState(getFreshBoard());
+    const [boardState, boardDispatch] = useReducer(boardReducer, getFreshBoard());
     const ctxValue = {
-        board,
-        setBoard
+        board: boardState,
+        setBoard: (callBack) => {
+            const newBoard = callBack(boardState);
+            boardDispatch({
+                type: 'UPDATE_BOARD',
+                payload: newBoard
+            })
+        }
     }
 
     return (<BoardContext.Provider value={ctxValue} >
