@@ -12,7 +12,6 @@ function App() {
 
   let [playerNames, setplayerNames] = useState({ player1: 'X', player2: 'Y' });
   const [isGameOver, setIsGameOver] = useState(false);
-  console.log('App component rendering', isGameOver);
 
   const openModal = () => {
     modal.current.showModal();

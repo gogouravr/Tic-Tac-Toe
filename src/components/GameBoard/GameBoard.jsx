@@ -16,7 +16,6 @@ function updateBoard(board, rowIdx, colIdx, symbol) {
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line react/display-name
 const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
-    console.log('GameBoard rendering!')
     const boardContext = useContext(BoardContext);
 
     const clickHandler = (rowIdx, colIdx) => {
@@ -27,7 +26,6 @@ const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
             return updateBoard(oldBoard, rowIdx, colIdx, playing);
         });
 
-        // console.log(isGameConcluded());
         setPlaying(togglePlaying(playing));
     }
 
@@ -41,7 +39,6 @@ const GameBoard = memo(({ playing, setPlaying, setIsGameOver }) => {
     };
 
     useEffect(() => {
-        console.log('use effect executed', isGameConcluded())
         if (isGameConcluded())
             /* if the react state is set with the same value as previous
             the rerender does not happen. This behaviour of React ensures 
